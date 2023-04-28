@@ -12,15 +12,22 @@ cyan = (0,255,255)
 def main():
     #pygame初始化
     pygame.init()
+
+    # 窗口標題
     pygame.display.set_caption('以python顯示圖片')
-    screen=pygame.display.set_mode((width,height))#設定視窗
-    clock=pygame.time.Clock()#建立clock
-    img_background=pygame.image.load('all white .png')
+
+    #設定視窗
+    screen=pygame.display.set_mode((width,height))
+
+    #建立clock
+    clock=pygame.time.Clock()
+
+    img_background = pygame.image.load('c:/Users/User/Documents/pygame/all white .png')
     img_background = pygame.transform.scale(img_background,[910,540])
     tmr=0
     class chara:
         def __init__(self,x,y,hp):
-            self.image = pygame.image.load('dot.jpg')
+            self.image = pygame.image.load('c:/Users/User/Documents/pygame/ dot.jpg')
             self.rect = self.image.get_rect()
             self.rect.x = x
             self.rect.y = y
@@ -34,14 +41,17 @@ def main():
                 self.rect.y -= 5
             if keys[pygame.K_DOWN]:
                 self.rect.y += 5
-#    width, height = 500, 500                   #遊戲畫面寬和高
+                
+    #width, height = 500, 500                   #遊戲畫面寬和高
     '''screen = pygame.display.set_mode((width, height))   #依設定顯示視窗
     pygame.display.set_caption("Test")                  #設定程式標題
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 80)
     tmr = 0
     img_bg = pygame.image.load("background.jpg")
-    '''#關閉程式的程式碼
+    '''
+    
+    #關閉程式的程式碼
     while True:
         tmr = tmr + 1
         for event in pygame.event.get():
