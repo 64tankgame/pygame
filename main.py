@@ -1,13 +1,61 @@
-#匯入pygame
-import pygame 
+import pygame
 import sys
+width=1100
+height=650
+class player(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        super().__init__()
+        self.image= pygame.image.load('dot.jpg')
+        self.rect=self.image.get_rect()
+        self.rect.x=x
+        self.rect.y=y
 
-width , height = 910,540
-white = (255,255,255)
-black = (0,0,0)
-cyan = (0,255,255)
+    def update(self):
+        keys=pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            self.rect.x-=5
+            if self.rect.left<=0:
+                self.rect.left=0
+        if keys[pygame.K_RIGHT]:
+            self.rect.x+=5
+            if self.rect.right>=width:
+                self.rect.right=width
+        if keys[pygame.K_UP]:
+            self.rect.y-=5
+            if self.rect.top<=0:
+                self.rect.top=0
+        if keys[pygame.K_DOWN]:
+            self.rect.y+=5
+            if self.rect.bottom>=height:
+                self.rect.bottom=height    
+class Game():
+    def __init__(self):
+        pygame.init()
+        self.screen=pygame.display.set_mode((width,height))
+        pygame.display.set_caption('my game')
+        self.all_sprites=pygame.sprite.Group()
+        self.player = player(width // 2, height // 2)
+        self.all_sprites.add(self.player)
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type==pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+            self.all_sprites.update()
+            self.screen.fill((255, 255, 255))
+            self.all_sprites.draw(self.screen)
+            pygame.display.update()
+# if __name__=='__dottry__':
+#     game = Game()
+#     game.run()
+game = Game()
+game.run()
 
 
+<<<<<<< HEAD
+                
+=======
 
 def main():
     #pygame初始化
@@ -78,3 +126,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+>>>>>>> main
