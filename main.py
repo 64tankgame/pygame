@@ -10,6 +10,28 @@ class player(pygame.sprite.Sprite):
         self.rect.x=x
         self.rect.y=y
 
+    #HITBOX
+    def draw(self, win):
+        if self.walkCount + 1 >= 27:
+            self.walkCount = 0
+
+        if not(self.standing):
+            if self.left:
+                win.blit(walkLeft[self.walkCount//3], (self.rect.x,self.rect.y))
+                self.walkCount += 1
+            elif self.right:
+                win.blit(walkRight[self.walkCount//3], (self.rect.x,self.rect.y))
+                self.walkCount +=1
+        else:
+            if self.right:
+                win.blit(walkRight[0], (self.rect.x, self.rect.y))
+            else:
+                win.blit(walkLeft[0], (self.rect.x, self.rect.y))
+        self.hitbox = (self.rect.x + 17, self.rect.y + 11, 29, 52) # NEW
+        pygame.draw.rect(win, (255,0,0), self.hitbox,2) # To draw the hit box around the player
+    #HITBOX
+
+
     def update(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
@@ -28,6 +50,7 @@ class player(pygame.sprite.Sprite):
             self.rect.y+=5
             if self.rect.bottom>=height:
                 self.rect.bottom=height    
+        
 class Game():
     def __init__(self):
         pygame.init()
@@ -46,6 +69,7 @@ class Game():
             self.screen.fill((255, 255, 255))
             self.all_sprites.draw(self.screen)
             pygame.display.update()
+            
 # if __name__=='__dottry__':
 #     game = Game()
 #     game.run()
@@ -53,9 +77,6 @@ game = Game()
 game.run()
 
 
-<<<<<<< HEAD
-                
-=======
 
 def main():
     #pygame初始化
@@ -126,4 +147,3 @@ def main():
 
 if __name__ == '__main__':
     main()
->>>>>>> main
