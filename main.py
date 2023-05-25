@@ -3,33 +3,14 @@ import sys
 width=1100
 height=650
 class player(pygame.sprite.Sprite):
-    def __init__(self,x,y):
+    def __init__(self,direction,x,y):
         super().__init__()
         self.image= pygame.image.load('dot.jpg')
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
-
-    #HITBOX
-    def draw(self, win):
-        if self.walkCount + 1 >= 27:
-            self.walkCount = 0
-
-        if not(self.standing):
-            if self.left:
-                win.blit(walkLeft[self.walkCount//3], (self.rect.x,self.rect.y))
-                self.walkCount += 1
-            elif self.right:
-                win.blit(walkRight[self.walkCount//3], (self.rect.x,self.rect.y))
-                self.walkCount +=1
-        else:
-            if self.right:
-                win.blit(walkRight[0], (self.rect.x, self.rect.y))
-            else:
-                win.blit(walkLeft[0], (self.rect.x, self.rect.y))
-        self.hitbox = (self.rect.x + 17, self.rect.y + 11, 29, 52) # NEW
-        pygame.draw.rect(win, (255,0,0), self.hitbox,2) # To draw the hit box around the player
-    #HITBOX
+        
+    
 
 
     def update(self):
@@ -49,7 +30,11 @@ class player(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN]:
             self.rect.y+=5
             if self.rect.bottom>=height:
-                self.rect.bottom=height    
+                self.rect.bottom=height   
+    
+ 
+   
+
         
 class Game():
     def __init__(self):
@@ -144,6 +129,7 @@ def main():
         pygame.display.update()
         clock.tick(5)
                    
+                
 
 if __name__ == '__main__':
     main()
