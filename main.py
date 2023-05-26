@@ -3,9 +3,9 @@ import sys
 width=1100
 height=650
 class player(pygame.sprite.Sprite):
-    def __init__(self,direction,x,y):
+    def __init__(self,x,y):
         super().__init__()
-        self.image= pygame.image.load('dot.jpg')
+        self.image= pygame.image.load('tank/tank_u.png')
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
@@ -80,8 +80,8 @@ def main():
     img_background = pygame.transform.scale(img_background,[910,540])
     tmr=0
     class chara:
-        def __init__(self,x,y,hp):
-            self.image = pygame.image.load('c:/Users/User/Documents/pygame/ dot.jpg')
+        def __init__(self,x,y,hp,direction):
+            
             self.rect = self.image.get_rect()
             self.rect.x = x
             self.rect.y = y
