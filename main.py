@@ -81,10 +81,12 @@ def main():
     tmr=0
     class chara:
         def __init__(self,x,y,hp,direction):
-            
+            self.image = pygame.image.load('c:/Users/User/Documents/pygame/ dot.jpg')
             self.rect = self.image.get_rect()
             self.rect.x = x
             self.rect.y = y
+            self.direction = "up" #方向
+            self.tank_all_image= self.image.subsurface((0, 0), (48, 48))
         def update(self):
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
@@ -95,7 +97,24 @@ def main():
                 self.rect.y -= 5
             if keys[pygame.K_DOWN]:
                 self.rect.y += 5
-                
+
+        def update_direction(self):
+       
+            if  self.direction == 'up':
+                self.tank_all_image = self.image.subsurface((0, 0), (48, 48))
+                self.image_postion_index = 0
+
+            elif self.direction == 'down':
+                self.tank_all_image = self.image.subsurface((0, 48), (48, 48))
+                self.image_postion_index = 48
+            elif self.direction == 'left':
+                self.tank_all_image = self.image.subsurface((0, 96), (48, 48))
+                self.image_postion_index = 96
+            elif self.direction == 'right':
+                self.tank_all_image = self.image.subsurface((0, 144), (48, 48))
+                self.image_postion_index = 144
+
+
     #width, height = 500, 500                   #遊戲畫面寬和高
     '''screen = pygame.display.set_mode((width, height))   #依設定顯示視窗
     pygame.display.set_caption("Test")                  #設定程式標題
