@@ -2,35 +2,49 @@ import pygame
 import sys
 width=1100
 height=650
+speed = 3
 class player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
         self.image= pygame.image.load('tank/tank_u.png')
+        self.image_p= pygame.image.load('tank/tank_u.png')
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
-        
+        self.rotate_direction = 0
     
 
 
     def update(self):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.rect.x-=5
-            if self.rect.left<=0:
-                self.rect.left=0
+            self.rect.x -= speed
+            if self.rect.left <= 0:
+                self.rect.left = 0
+            if self.rotate_direction != 3:
+                self.rotate_direction = 3
+                self.image = pygame.transform.rotate(self.image_p, 90)
         if keys[pygame.K_RIGHT]:
-            self.rect.x+=5
+            self.rect.x += speed
             if self.rect.right>=width:
                 self.rect.right=width
+            if self.rotate_direction != 1:
+                self.rotate_direction = 1
+                self.image = pygame.transform.rotate(self.image_p, -90)
         if keys[pygame.K_UP]:
-            self.rect.y-=5
+            self.rect.y -= speed
             if self.rect.top<=0:
                 self.rect.top=0
+            if self.rotate_direction != 0:
+                self.rotate_direction = 0
+                self.image = pygame.transform.rotate(self.image_p, 0)
         if keys[pygame.K_DOWN]:
-            self.rect.y+=5
+            self.rect.y += speed
             if self.rect.bottom>=height:
-                self.rect.bottom=height   
+                self.rect.bottom=height
+            if self.rotate_direction != 2:
+                self.rotate_direction = 2
+                self.image = pygame.transform.rotate(self.image_p, 180)
     
  
    
@@ -88,6 +102,7 @@ def main():
             self.direction = "up" #方向
             self.tank_all_image= self.image.subsurface((0, 0), (48, 48))
         def update(self):
+            
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
                 self.rect.x -= 5
@@ -146,7 +161,7 @@ def main():
         #screen.blit(txt , [125,125])
         '''
         pygame.display.update()
-        clock.tick(5)
+        clock.tick(60)
                    
                 
 
