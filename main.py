@@ -1,8 +1,10 @@
 import pygame
 import sys
-width=1100
-height=650
+from bullet import Bullet
+width=1300
+height=750
 speed = 3
+all_bullet_sprite = pygame.sprite.Group()
 class player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
@@ -45,6 +47,11 @@ class player(pygame.sprite.Sprite):
             if self.rotate_direction != 2:
                 self.rotate_direction = 2
                 self.image = pygame.transform.rotate(self.image_p, 180)
+        if keys[pygame.K_SPACE]:
+            bullet = Bullet(self.rect.centerx,self.rect.centery,self.rotate_direction)
+            all_bullet_sprite.add(bullet)
+
+
     
  
    
@@ -65,8 +72,10 @@ class Game():
                     pygame.quit()
                     sys.exit()
             self.all_sprites.update()
+            all_bullet_sprite.update()
             self.screen.fill((255, 255, 255))
             self.all_sprites.draw(self.screen)
+            all_bullet_sprite.draw(self.screen)
             pygame.display.update()
             
 # if __name__=='__dottry__':
