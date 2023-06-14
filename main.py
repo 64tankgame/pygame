@@ -3,8 +3,11 @@ import sys
 from bullet import Bullet
 width=1300
 height=750
-speed = 3
+speed = 2
 all_bullet_sprite = pygame.sprite.Group()
+time_tank_1_attack = 0
+cooldown_tank_1 = 0
+
 class player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
@@ -16,8 +19,9 @@ class player(pygame.sprite.Sprite):
         self.rotate_direction = 0
     
 
-
     def update(self):
+        global time_tank_1_attack
+
         keys=pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.rect.x -= speed
@@ -26,6 +30,7 @@ class player(pygame.sprite.Sprite):
             if self.rotate_direction != 3:
                 self.rotate_direction = 3
                 self.image = pygame.transform.rotate(self.image_p, 90)
+
         if keys[pygame.K_RIGHT]:
             self.rect.x += speed
             if self.rect.right>=width:
@@ -33,6 +38,7 @@ class player(pygame.sprite.Sprite):
             if self.rotate_direction != 1:
                 self.rotate_direction = 1
                 self.image = pygame.transform.rotate(self.image_p, -90)
+
         if keys[pygame.K_UP]:
             self.rect.y -= speed
             if self.rect.top<=0:
@@ -40,6 +46,7 @@ class player(pygame.sprite.Sprite):
             if self.rotate_direction != 0:
                 self.rotate_direction = 0
                 self.image = pygame.transform.rotate(self.image_p, 0)
+        
         if keys[pygame.K_DOWN]:
             self.rect.y += speed
             if self.rect.bottom>=height:
@@ -47,16 +54,18 @@ class player(pygame.sprite.Sprite):
             if self.rotate_direction != 2:
                 self.rotate_direction = 2
                 self.image = pygame.transform.rotate(self.image_p, 180)
+        
         if keys[pygame.K_SPACE]:
-            bullet = Bullet(self.rect.centerx,self.rect.centery,self.rotate_direction)
-            all_bullet_sprite.add(bullet)
+            if time_tank_1_attack <= 0: 
+                bullet = Bullet(self.rect.centerx,self.rect.centery,self.rotate_direction,0)
+                all_bullet_sprite.add(bullet)
+                time_tank_1_attack = 200
+
+        if time_tank_1_attack >= 0 :
+            time_tank_1_attack -= 1        
 
 
     
- 
-   
-
-        
 class Game():
     def __init__(self):
         pygame.init()
@@ -65,12 +74,14 @@ class Game():
         self.all_sprites=pygame.sprite.Group()
         self.player = player(width // 2, height // 2)
         self.all_sprites.add(self.player)
+
     def run(self):
         while True:
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+            
             self.all_sprites.update()
             all_bullet_sprite.update()
             self.screen.fill((255, 255, 255))

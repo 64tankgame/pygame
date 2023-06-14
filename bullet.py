@@ -3,20 +3,39 @@ import pygame
 
 width=1100
 height=650
-path = 'tank/magicball1.png'
+bullet_image = pygame.transform.scale(pygame.image.load('yellow_bullet.png'),(30,30))
+#暫時用這個圖片而已，有找到適合的就換
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self,x,y,direction):
+    def __init__(self,x,y,direction,rotate_or_not):
         super().__init__()
-        self.image = pygame.image.load(path)
+        self.image = pygame.transform.scale(bullet_image,(50,50))
+        self.image_p = pygame.transform.scale(bullet_image,(50,50))
         self.rect = self.image.get_rect()
         self.d = direction
+        self.rotate_or_not = rotate_or_not
         if self.d==1 or self.d==3:
             self.rect.center = (x,y-15)
         else:
             self.rect.center = (x,y)
 
     def update(self):
+        if self.rotate_or_not == 0:
+            if self.d == 0:
+                self.image = pygame.transform.rotate(self.image_p,0)
+                self.rotate_or_not = 1
+            elif self.d == 1:
+                self.image = pygame.transform.rotate(self.image_p,-90)
+                self.rotate_or_not = 1
+            elif self.d ==2 :
+                self.image = pygame.transform.rotate(self.image_p,180)
+                self.rotate_or_not = 1    
+            elif self.d==3:
+                self.image = pygame.transform.rotate(self.image_p,90)
+                self.rotate_or_not = 1
+
+        
+        
         if self.rect.centerx>width or self.rect.centerx < 0 or self.rect.centery > height or self.rect.centery < 0:
             self.kill()
         if self.d == 0:
