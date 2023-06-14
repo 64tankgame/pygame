@@ -13,6 +13,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image_p = pygame.transform.scale(bullet_image,(50,50))
         self.rect = self.image.get_rect()
         self.d = direction
+        self.move_speed = 5
         self.rotate_or_not = rotate_or_not
         if self.d==1 or self.d==3:
             self.rect.center = (x,y-15)
@@ -40,15 +41,15 @@ class Bullet(pygame.sprite.Sprite):
             self.kill()
         if self.d == 0:
             vx = 0
-            vy = -1
+            vy = -1 * self.move_speed
         elif self.d == 1:
-            vx = 1
+            vx = 1 * self.move_speed
             vy = 0
         elif self.d == 2:
             vx = 0
-            vy = 1
+            vy = 1 * self.move_speed
         elif self.d == 3:
-            vx = -1
+            vx = -1 * self.move_speed
             vy = 0
         self.rect.centerx += vx
         self.rect.centery += vy
