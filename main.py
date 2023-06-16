@@ -1,13 +1,20 @@
 import pygame
 import sys
 from bullet import Bullet
+from setting import *
+from tank2 import *
+from tank2 import player2
+
+
+
+'''
 width=1300
 height=750
 speed = 2
 all_bullet_sprite = pygame.sprite.Group()
 time_tank_1_attack = 0
 cooldown_tank_1 = 0
-
+'''
 class player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
@@ -59,7 +66,7 @@ class player(pygame.sprite.Sprite):
             if time_tank_1_attack <= 0: 
                 bullet = Bullet(self.rect.centerx,self.rect.centery,self.rotate_direction,0)
                 all_bullet_sprite.add(bullet)
-                time_tank_1_attack = 200
+                time_tank_1_attack = 160
 
         if time_tank_1_attack >= 0 :
             time_tank_1_attack -= 1        
@@ -69,11 +76,13 @@ class player(pygame.sprite.Sprite):
 class Game():
     def __init__(self):
         pygame.init()
-        self.screen=pygame.display.set_mode((width,height))
+        self.screen = pygame.display.set_mode((width,height))
         pygame.display.set_caption('my game')
-        self.all_sprites=pygame.sprite.Group()
+        self.all_sprites = pygame.sprite.Group()
         self.player = player(width // 2, height // 2)
         self.all_sprites.add(self.player)
+        self.player2 = player2(width // 4, height // 4)
+        self.all_sprites.add(self.player2)
 
     def run(self):
         clock=pygame.time.Clock()
