@@ -18,8 +18,8 @@ cooldown_tank_1 = 0
 class player(pygame.sprite.Sprite):
     def __init__(self,x,y):
         super().__init__()
-        self.image= pygame.image.load('tank/tank_u.png')
-        self.image_p= pygame.image.load('tank/tank_u.png')
+        self.image= pygame.image.load('project_o\\tank/tank_u.png')
+        self.image_p= pygame.image.load('project_o\\tank/tank_u.png')
         self.rect=self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
@@ -62,7 +62,7 @@ class player(pygame.sprite.Sprite):
                 self.rotate_direction = 2
                 self.image = pygame.transform.rotate(self.image_p, 180)
         
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_RETURN]:
             if time_tank_1_attack <= 0: 
                 bullet = Bullet(self.rect.centerx,self.rect.centery,self.rotate_direction,0)
                 all_bullet_sprite.add(bullet)

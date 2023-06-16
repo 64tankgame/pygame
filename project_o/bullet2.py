@@ -3,7 +3,7 @@ import pygame
 
 width=1300
 height=750
-bullet_image = pygame.transform.scale(pygame.image.load('yellow_bullet.png'),(30,30))
+bullet_image = pygame.transform.scale(pygame.image.load('project_o\\yellow_bullet.png'),(30,30))
 #暫時用這個圖片而已，有找到適合的就換
 
 class Bullet2(pygame.sprite.Sprite):

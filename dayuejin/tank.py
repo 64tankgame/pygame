@@ -52,7 +52,7 @@ class TANK_P1(pygame.sprite.Sprite):
         self.rect.centery += vy*(self.move_speed/2)
     
     def rotate(self,d):
-        self.angle += d * math.pi/80
+        self.angle += d * math.pi/180
         self.image = pygame.transform.rotate(self.image_p,math.degrees(self.angle))
         old_center = self.rect.center   
         self.rect = self.image.get_rect()
@@ -172,7 +172,7 @@ class TANK_P2(pygame.sprite.Sprite):
 
 
     def rotate(self,d):
-        self.angle += d * math.pi/80
+        self.angle += d * math.pi/180
         self.image = pygame.transform.rotate(self.image_p,math.degrees(self.angle-math.pi))
         old_center = self.rect.center   
         self.rect = self.image.get_rect()

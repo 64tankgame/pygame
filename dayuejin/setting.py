@@ -15,8 +15,8 @@ shell_sprite = pygame.sprite.Group()
 bar_sprite = pygame.sprite.Group()
 
 
-t1_b_img_path = 'assets\\tankp1\\body.png'
-t1_t_img_path = 'assets\\tankp1\\turrent.png'
+t1_b_img_path = 'dayuejin\\assets\\tankp1\\body.png'
+t1_t_img_path = 'dayuejin\\assets\\tankp1\\turrent.png'
 
 t1_b_img = pygame.transform.scale(pygame.image.load(t1_b_img_path),(50,149/2))
 t1_b_img = pygame.transform.rotate(t1_b_img,-90)
@@ -34,10 +34,10 @@ t2_t_img = pygame.transform.rotate(t2_t_img,-90)
 
 
 
-shell_img_path = 'assets\\shell\\Light_Shell.png'
+shell_img_path = 'dayuejin\\assets\\shell\\Light_Shell.png'
 shell_img = pygame.transform.scale(pygame.image.load(shell_img_path),(10,24))
 shell_img = pygame.transform.rotate(shell_img,-90)
 
 
 
-game_font = pygame.font.Font('assets\\font\\Cubic_11_1.013_R.ttf',20)
+game_font = pygame.font.Font('dayuejin\\assets\\font\\Cubic_11_1.013_R.ttf',20)
