@@ -76,6 +76,7 @@ class Game():
         self.all_sprites.add(self.player)
 
     def run(self):
+        clock=pygame.time.Clock()
         while True:
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
@@ -87,7 +88,9 @@ class Game():
             self.screen.fill((255, 255, 255))
             self.all_sprites.draw(self.screen)
             all_bullet_sprite.draw(self.screen)
+            clock.tick(144)
             pygame.display.update()
+
             
 # if __name__=='__dottry__':
 #     game = Game()
